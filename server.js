@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
 
-module.exports = app;
-
 /* Do not change the following line! It is required for testing and allowing
  *  the frontend application to interact as planned with the api server
  */
@@ -15,7 +13,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 // Mount your existing apiRouter below at the '/api' path.
-const apiRouter = require("./server/api");
+const apiRouter = require(__dirname + "/server/api");
+app.use("/api", apiRouter);
 
 // This conditional is here for testing purposes:
 if (!module.parent) {
@@ -28,3 +27,5 @@ if (!module.parent) {
 		console.log(`Server is listening on port ${PORT}.`);
 	});
 }
+
+module.exports = app;

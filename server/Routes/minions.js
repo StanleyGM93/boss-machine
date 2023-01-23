@@ -1,13 +1,25 @@
 const express = require("express");
+const ideasRouter = require("./ideas");
 const minionsRouter = express.Router();
 
 minionsRouter
-	.route("/minions")
+	.route("/")
 	.get((req, res) => {
-		res.send("get request received");
+		res.send("minions route is working");
 	})
 	.post((req, res) => {
-		res.send("post request received");
+		res.send("minions post is working");
 	});
 
+minionsRouter
+	.route("/:minionId")
+	.get((req, res) => {
+		res.send("minionId get is working");
+	})
+	.put((req, res) => {
+		res.send("minionId put is working");
+	})
+	.delete((req, res) => {
+		res.send("minionId delete is working");
+	});
 module.exports = minionsRouter;
