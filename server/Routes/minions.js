@@ -1,14 +1,18 @@
 const express = require("express");
-const ideasRouter = require("./ideas");
 const minionsRouter = express.Router();
+const dbHelperFunctions = require("../db");
 
 minionsRouter
 	.route("/")
 	.get((req, res) => {
-		res.send("minions route is working");
+		const allMinions = dbHelperFunctions.getAllFromDatabase("minions");
+		res.send(allMinions);
 	})
 	.post((req, res) => {
 		res.send("minions post is working");
+		const requestBody = req.body;
+		const newMinion = dbHelperFunctions.addToDatabase("minion", requestBody);
+		res.send(newMinion);
 	});
 
 minionsRouter
