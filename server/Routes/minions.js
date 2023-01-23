@@ -7,11 +7,14 @@ minionsRouter
 	.get((req, res) => {
 		const allMinions = dbHelperFunctions.getAllFromDatabase("minions");
 		res.send(allMinions);
+		console.log("minions get request received and sent");
 	})
 	.post((req, res) => {
-		res.send("minions post is working");
+		// res.send("minions post is working");
 		const requestBody = req.body;
+		console.log(req.body);
 		const newMinion = dbHelperFunctions.addToDatabase("minion", requestBody);
+		console.log(newMinion);
 		res.send(newMinion);
 	});
 
