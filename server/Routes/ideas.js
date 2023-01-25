@@ -17,6 +17,7 @@ ideasRouter
 			const addNewIdea = dbHelperFunctions.addToDatabase("ideas", newIdea);
 			res.status(201).send(addNewIdea);
 		}
+		res.status(400).send();
 	});
 
 ideasRouter.use("/:ideaId", (req, res, next) => {

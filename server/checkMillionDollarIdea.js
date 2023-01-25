@@ -1,4 +1,7 @@
 const checkMillionDollarIdea = (numWeeks, weeklyRevenue) => {
+	if (numWeeks !== Number || weeklyRevenue !== Number) {
+		return false;
+	}
 	const expectedReturn = numWeeks * weeklyRevenue;
 	const oneMillionDollars = 1000000;
 	return expectedReturn >= oneMillionDollars;
