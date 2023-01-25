@@ -10,7 +10,11 @@ meetingsRouter
 	})
 	.post((req, res) => {
 		const newMeeting = dbHelperFunctions.createMeeting();
-		res.status(201).send(newMeeting);
+		const addMeetingToDb = dbHelperFunctions.addToDatabase(
+			"meetings",
+			newMeeting
+		);
+		res.status(201).send(addMeetingToDb);
 	})
 	.delete((req, res) => {
 		dbHelperFunctions.deleteAllFromDatabase("meetings");
