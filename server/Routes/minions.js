@@ -12,7 +12,7 @@ minionsRouter
 		const requestBody = req.body;
 		requestBody.salary = Number(requestBody.salary);
 		const newMinion = dbHelperFunctions.addToDatabase("minions", requestBody);
-		res.send(newMinion);
+		res.status(201).send(newMinion);
 	});
 
 minionsRouter.use("/:minionId", (req, res, next) => {
