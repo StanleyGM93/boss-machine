@@ -1,16 +1,20 @@
 const express = require("express");
 const meetingsRouter = express.Router();
+const dbHelperFunctions = require("../db");
 
 meetingsRouter
 	.route("/")
 	.get((req, res) => {
-		res.send("meetings get working");
+		const allMeetings = dbHelperFunctions.getAllFromDatabase("meetings");
+		res.send(allMeetings);
 	})
 	.post((req, res) => {
-		res.send("post request working");
+		const newMeeting = dbHelperFunctions.createMeeting();
+		res.status(201).send(newMeeting);
 	})
 	.delete((req, res) => {
-		res.send("delete meetings working");
+		dbHelperFunctions.deleteAllFromDatabase("meetings");
+		res.status(204).send("All meetings have been removed");
 	});
 
 module.exports = meetingsRouter;
