@@ -35,11 +35,14 @@ minionsRouter
 	.put((req, res) => {
 		const requestBody = req.body;
 		requestBody.salary = Number(requestBody.salary);
-		req.minion = requestBody;
-		res.send(req.minion);
+		const updatedMinionInfo = dbHelperFunctions.updateInstanceInDatabase(
+			"minions",
+			requestBody
+		);
+		res.send(updatedMinionInfo);
 	})
 	.delete((req, res) => {
-		req.minion = null;
+		dbHelperFunctions.deleteFromDatabasebyId("minions", req.minion.id);
 		res.status(204).send("Minion has been removed");
 	});
 module.exports = minionsRouter;
