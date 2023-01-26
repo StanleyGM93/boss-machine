@@ -9,15 +9,9 @@ ideasRouter
 		const allIdeas = dbHelperFunctions.getAllFromDatabase("ideas");
 		res.send(allIdeas);
 	})
-	.post((req, res) => {
-		const newIdea = req.body;
-		const numWeeks = Number(req.body.numWeeks);
-		const weeklyRevenue = Number(req.body.weeklyRevenue);
-		if (checkMillionDollarIdea(numWeeks, weeklyRevenue)) {
-			const addNewIdea = dbHelperFunctions.addToDatabase("ideas", newIdea);
-			res.status(201).send(addNewIdea);
-		}
-		res.status(400).send();
+	.post(checkMillionDollarIdea, (req, res, next) => {
+		const newIdea = dbHelperFunctions.addToDatabase("ideas", req.body);
+		res.status(201).send(newIdea);
 	});
 
 ideasRouter.use("/:ideaId", (req, res, next) => {

@@ -1,10 +1,16 @@
-const checkMillionDollarIdea = (numWeeks, weeklyRevenue) => {
-	if (numWeeks !== Number || weeklyRevenue !== Number) {
-		return false;
+const checkMillionDollarIdea = (req, res, next) => {
+	const { numWeeks, weeklyRevenue } = req.body;
+	const totalMoney = Number(numWeeks) * Number(weeklyRevenue);
+	if (
+		!numWeeks ||
+		!weeklyRevenue ||
+		isNaN(totalMoney) ||
+		totalMoney < 1000000
+	) {
+		res.status(400).send();
+	} else {
+		next();
 	}
-	const expectedReturn = numWeeks * weeklyRevenue;
-	const oneMillionDollars = 1000000;
-	return expectedReturn >= oneMillionDollars;
 };
 
 // Leave this exports assignment so that the function can be used elsewhere
